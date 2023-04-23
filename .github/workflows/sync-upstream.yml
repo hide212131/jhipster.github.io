@@ -40,7 +40,9 @@ jobs:
     - name: Create new branch
       run: |
         SHORT_COMMIT_HASH=$(git rev-parse --short origin/main)
-        git checkout -b sync-$SHORT_COMMIT_HASH origin/main
+        BRANCH_NAME=sync-$SHORT_COMMIT_HASH
+        git checkout -b $BRANCH_NAME origin/main
+        echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
 
     - name: Merge upstream/main
       run: git merge upstream/main --allow-unrelated-histories --no-edit || true
@@ -59,12 +61,7 @@ jobs:
         git push origin HEAD
 
     - name: Create pull request
-      uses: peter-evans/create-pull-request@v3
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        title: "Sync with upstream"
-        base: main
-        body: |
-          以下のコンフリクトが解決される必要があります：
-          ${{ env.checkbox_conflict_files }}
-
+      run: |
+        gh pr create --title "Merge ${{ env.branch_name }} into main" --base main --head ${{ env.branch_name }} --repo ${{ github.repository }} --body $'${{ env.checkbox_conflict_files }}'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
