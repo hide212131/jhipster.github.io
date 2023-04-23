@@ -61,7 +61,13 @@ JDLを使用する場合は、JDLファイルに行`filter <エンティティ�
 この機能を有効にすると、`EntityQueryService`という名前の新しいサービスと`EntityCriteria`が生成されます。Springはリクエストパラメータを`EntityCriteria`クラスのフィールドに変換します。
 `EntityQueryService`では、クライテリアオブジェクトを静的でタイプセーフなJPAクエリオブジェクトに変換します。このためには、ビルドで**静的メタモデル生成が有効になっている**ことが**必要**です。詳細については、[JPA静的メタモデルジェネレータのドキュメント](http://docs.jboss.org/hibernate/orm/current/topical/html_single/metamodelgen/MetamodelGenerator.html)を参照してください。
 
+<<<<<<< HEAD
 生成されたクライテリアが機能し、Springが適切に構成されていることを証明するために、個々のフィルタごとに1つずつといった多くのテストケースを持つ`EntityResourceIntTest`が作られます。
+=======
+In the `EntityQueryService`, we convert the criteria object into a static, and type safe, JPA query object. For this, it is **required** that the **static metamodel generation is enabled** in the build. See the [JPA Static Metamodel Generator documentation](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#tooling-modelgen) for details.
+
+To prove that the generated criteria is working, and Spring is well configured, the `EntityResourceIntTest` is extended with lots of test cases, one for each individual filter.
+>>>>>>> upstream/main
 
 ### Angular
 
