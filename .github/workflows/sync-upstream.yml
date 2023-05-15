@@ -52,26 +52,30 @@ jobs:
 
     - name: Merge upstream/main
       if: ${{ env.branch_exists != 'true' }}
-      run: git merge upstream/main --allow-unrelated-histories --no-edit || true
+      run: |
+        OUTPUT=$(git merge upstream/main --allow-unrelated-histories --no-edit || true)
+        if echo $OUTPUT | grep -q 'Already up to date.'; then
+          echo "merge_status=up_to_date" >> $GITHUB_ENV
+        fi
 
     - name: Commit merge conflicts
-      if: ${{ env.branch_exists != 'true' }}
+      if: ${{ env.branch_exists != 'true' && env.merge_status != 'up_to_date' }}
       run: git commit -a --no-edit || true
 
     - name: Find conflict files
-      if: ${{ env.branch_exists != 'true' }}
+      if: ${{ env.branch_exists != 'true' && env.merge_status != 'up_to_date' }}
       id: find-conflict-files
       run: |
         CONFLICT_FILES=$(git diff HEAD^ HEAD --name-only --diff-filter=M | while read file; do if grep -q '<<<<<<< HEAD' "$file"; then echo -n "- [ ] $file\\n"; fi; done)
         echo "checkbox_conflict_files=${CONFLICT_FILES}" >> $GITHUB_ENV
 
     - name: Push new branch
-      if: ${{ env.branch_exists != 'true' }}
+      if: ${{ env.branch_exists != 'true' && env.merge_status != 'up_to_date' }}
       run: |
         git push origin HEAD
 
     - name: Create pull request
-      if: ${{ env.branch_exists != 'true' }}
+      if: ${{ env.branch_exists != 'true' && env.merge_status != 'up_to_date' }}
       run: |
         gh pr create --title "Merge ${{ env.branch_name }} into main" --base main --head ${{ env.branch_name }} --repo ${{ github.repository }} --body $'フォーク元が更新されましたのでマージしてください。\n\n以下はコンフリクトがあります。\n\n${{ env.checkbox_conflict_files }}\n\n修正をPushしてコンフリクトを解消してください。'
       env:
