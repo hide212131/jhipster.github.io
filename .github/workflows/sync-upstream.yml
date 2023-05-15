@@ -39,8 +39,13 @@ jobs:
 
     - name: Create new branch
       run: |
-        SHORT_COMMIT_HASH=$(git rev-parse --short origin/main)
+        SHORT_COMMIT_HASH=$(git rev-parse --short upstream/main)
         BRANCH_NAME=sync-$SHORT_COMMIT_HASH
+        EXISTS=$(git ls-remote --heads origin $BRANCH_NAME | wc -l)
+        if [ $EXISTS -eq 1 ]; then
+          echo "ブランチ $BRANCH_NAME は既に存在します"
+          exit 0
+        fi        
         git checkout -b $BRANCH_NAME origin/main
         echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
 
