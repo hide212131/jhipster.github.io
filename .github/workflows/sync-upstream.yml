@@ -44,28 +44,34 @@ jobs:
         EXISTS=$(git ls-remote --heads origin $BRANCH_NAME | wc -l)
         if [ $EXISTS -eq 1 ]; then
           echo "ブランチ $BRANCH_NAME は既に存在します"
+          echo "branch_exists=true" >> $GITHUB_ENV
           exit 0
         fi        
         git checkout -b $BRANCH_NAME origin/main
         echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
 
     - name: Merge upstream/main
+      if: ${{ env.branch_exists != 'true' }}
       run: git merge upstream/main --allow-unrelated-histories --no-edit || true
 
     - name: Commit merge conflicts
+      if: ${{ env.branch_exists != 'true' }}
       run: git commit -a --no-edit || true
 
     - name: Find conflict files
+      if: ${{ env.branch_exists != 'true' }}
       id: find-conflict-files
       run: |
         CONFLICT_FILES=$(git diff HEAD^ HEAD --name-only --diff-filter=M | while read file; do if grep -q '<<<<<<< HEAD' "$file"; then echo -n "- [ ] $file\\n"; fi; done)
         echo "checkbox_conflict_files=${CONFLICT_FILES}" >> $GITHUB_ENV
 
     - name: Push new branch
+      if: ${{ env.branch_exists != 'true' }}
       run: |
         git push origin HEAD
 
     - name: Create pull request
+      if: ${{ env.branch_exists != 'true' }}
       run: |
         gh pr create --title "Merge ${{ env.branch_name }} into main" --base main --head ${{ env.branch_name }} --repo ${{ github.repository }} --body $'フォーク元が更新されましたのでマージしてください。\n\n以下はコンフリクトがあります。\n\n${{ env.checkbox_conflict_files }}\n\n修正をPushしてコンフリクトを解消してください。'
       env:
