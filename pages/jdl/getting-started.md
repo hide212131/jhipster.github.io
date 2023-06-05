@@ -75,8 +75,13 @@ JDLをプロジェクトで使用する場合は、次のようにして追加�
 
 ---
 
+<<<<<<< HEAD
 ここでは、コンテンツを生成するさまざまな方法を理解するために、小さなJDLコンテンツから始めます。
 構文については他のセクションで説明しますが、ここでは生成に焦点を当てます。
+=======
+For now, we'll start with small JDL content to get to know the various ways to generate content.
+The focus here is on the generation of code. Explanation about the syntax is made in other sections.
+>>>>>>> upstream/main
 
 ここでは、基本的なコンテンツを使用します。
 
