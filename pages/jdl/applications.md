@@ -491,7 +491,7 @@ _あなたが探しているものではありませんか?[通常のオプシ�
   <tr>
     <td>messageBroker</td>
     <td>no</td>
-    <td>kafka, no</td>
+    <td>kafka, pulsar, no</td>
     <td></td>
   </tr>
   <tr>

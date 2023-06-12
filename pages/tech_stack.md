@@ -37,6 +37,7 @@ Single Web page Applicationがニーズと合わない場合はどうすれば�
 
 完全な[Springアプリケーション](http://spring.io/)です。
 
+<<<<<<< HEAD
 * アプリケーションの構成は、[Spring Boot](http://projects.spring.io/spring-boot/)を使用
 * アプリケーションのビルド、テスト、実行のための [Maven](http://maven.apache.org/) または [Gradle](http://www.gradle.org/) の構成
 * [「開発」と「プロダクション」のプロファイル]({{ site.url }}/profiles/)（Maven用とGradle用の両方）
@@ -49,6 +50,20 @@ Single Web page Applicationがニーズと合わない場合はどうすれば�
 * JPAの代わりにドキュメント指向のNoSQLデータベースを使いたい場合は、[MongoDB](http://www.mongodb.org)と[Couchbase](https://www.couchbase.com)をサポート
 * JPAの代わりにカラム指向のNoSQLデータベースを使用したい場合は、[Cassandra](http://cassandra.apache.org/)をサポート
 * Pub/Subのメッセージングシステムを使用する場合は、[Kafka](http://kafka.apache.org/)をサポート
+=======
+*   [Spring Boot](http://projects.spring.io/spring-boot/) for application configuration
+*   [Maven](http://maven.apache.org/) or [Gradle](http://www.gradle.org/) configuration for building, testing and running the application
+*   ["development" and "production" profiles]({{ site.url }}/profiles/) (both for Maven and Gradle)
+*   [Spring Security](http://docs.spring.io/spring-security/site/index.html)
+*   [Spring MVC REST](http://spring.io/guides/gs/rest-service/) + [Jackson](https://github.com/FasterXML/jackson)
+*   Optional WebSocket support with Spring Websocket
+*   [Spring Data JPA](http://projects.spring.io/spring-data-jpa/) + Bean Validation
+*   Database updates with [Liquibase](http://www.liquibase.org/)
+*   [Elasticsearch](https://github.com/elastic/elasticsearch) support if you want to have search capabilities on top of your database
+*   [MongoDB](http://www.mongodb.org) and [Couchbase](https://www.couchbase.com) support if you'd rather use a document-oriented NoSQL database instead of JPA
+*   [Cassandra](http://cassandra.apache.org/) support if you'd rather use a column-oriented NoSQL database instead of JPA
+*   [Kafka](http://kafka.apache.org/) and [Pulsar](http://pulsar.apache.org/) support if you want to use a publish-subscribe messaging system
+>>>>>>> upstream/main
 
 ## マイクロサービスのための技術スタック
 

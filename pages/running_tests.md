@@ -81,6 +81,7 @@ UI統合テストは、[Cypress](https://www.cypress.io/){:target="_blank" rel="
 
 ## パフォーマンステスト
 
+<<<<<<< HEAD
 パフォーマンステストは[Gatling](http://gatling.io/){:target="_blank" rel="noopener"}で行われ、`src/test/gatling`フォルダにあります。これらはエンティティごとに生成され、多くの同時ユーザー要求でそれぞれをテストできます。
 
 Gatlingテストを実行するには、次の手順を実行する必要があります。
@@ -88,6 +89,9 @@ Gatlingテストを実行するには、次の手順を実行する必要があ�
 1. [Gatlingをダウンロードします](https://gatling.io/open-source/){:target="_blank" rel="noopener"}。
 2. ファイルを抽出し、その場所を`PATH`に追加します。
 3. cdで`src/test/gatling`に移動し、お使いのOSに応じて`gatling.sh`または`gatling.bat`を実行します。
+=======
+Performance tests are done with [Gatling](http://gatling.io/){:target="_blank" rel="noopener"}, and are located in the `src/test/java/gatling/simulations` folder. They are generated for each entity, and allow to test each of them with a lot of concurrent requests.
+>>>>>>> upstream/main
 
 **警告!** 現時点では、これらのテストではエンティティに適用した検証ルールが考慮されていません。また、別のエンティティと必要な関係を持つエンティティを作成するためのテストは、そのままでは失敗します。いずれにしても、ビジネス・ルールに従ってこれらのテストを変更する必要があるため、テストを改善するためのヒントをいくつか示します。
 
@@ -101,6 +105,7 @@ Gatlingテストを実行するには、次の手順を実行する必要があ�
 *   マイクロサービスアプリケーションの実行
 *   その後、Gatlingテストを実行できます
 
+<<<<<<< HEAD
 ### Gatlingを実行するためのMaven/Gradleの使用
 
 Gatlingテストを実行するためのMavenまたはGradleの設定は生成しません。これは、他のプラグインでクラスパスの問題（主にScalaを使用時）が発生する可能性があるためです。
@@ -172,6 +177,12 @@ gatling {
 }
 ...
 ```
+=======
+### Using Maven to run Gatling
+
+You can execute all Gatling tests with `./mvnw gatling:test`.
+### Using Gradle to run Gatling
+>>>>>>> upstream/main
 
 すべてのGatlingのテストは`./gradlew gatlingRun`で実行できます。
 ## ビヘイビア駆動開発（BDD）

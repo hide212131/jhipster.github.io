@@ -11,6 +11,7 @@ sitemap:
 
 ## 概要
 
+<<<<<<< HEAD
 1. [リレーションシップの種類](#リレーションシップの種類)
 1. [リレーションシップのメソッド](#リレーションシップのメソッド)
 1. [複数のリレーションシップのボディ](#複数のリレーションシップのボディ)
@@ -23,6 +24,21 @@ sitemap:
    1. [必須のサイド](#必須のサイド)
    1. [再帰リレーションシップ](#再帰リレーションシップ)
    1. [コメント](#コメント)
+=======
+1. [Relationship types](#relationship-types)
+1. [Relationship methods](#relationship-methods)
+1. [Multiple relationship bodies](#multiple-relationship-bodies)
+1. [Syntax](#syntax)
+1. [Examples](#examples)
+   1. [Basic example](#basic-example)
+   1. [With injected fields](#with-injected-fields)
+   1. [With joint fields](#with-joint-fields)
+   1. [With methods](#with-methods)
+   1. [With options](#with-options)
+   1. [With required sides](#with-required-sides)
+   1. [Reflexive relationships](#reflexive-relationships)
+   1. [Commenting](#commenting)
+>>>>>>> upstream/main
 
 ---
 
@@ -94,10 +110,11 @@ relationship OneToOne {
 リレーションシップの宣言は次のように行われます。
 ```
 relationship (OneToMany | ManyToOne | OneToOne | ManyToMany) {
-  <from entity>[{<relationship name>[(<display field>)]}] to <to entity>[{<relationship name>[(<display field>)]}]+
+  @<option>("<option value>")+ <from entity>[{<relationship name>[(<display field>)]}] to @<option>("<option value>")+ <to entity>[{<relationship name>[(<display field>)]}]+
 }
 ```
 
+<<<<<<< HEAD
   - `(OneToMany | ManyToOne| OneToOne | ManyToMany)`はリレーションシップのタイプです。
   - `<from entity>`は、リレーションシップのエンティティの所有者の名前です：いわゆる「元」です。
   - `<to entity>`は、リレーションシップの先となるエンティティの名前です：いわゆる「先」です。
@@ -107,6 +124,19 @@ relationship (OneToMany | ManyToOne | OneToOne | ManyToMany) {
   - `with jpaDerivedIdentifier`は、関連付けに`@MapsId`が使用されているかどうかを示します（1対1の場合のみ適用可能）。
   - 複数のリレーションシップ主体を持つことができます。
     - 詳細については、[複数のリレーションシップのボディ](#複数のリレーションシップのボディ)セクションを参照してください。
+=======
+  - `(OneToMany | ManyToOne| OneToOne | ManyToMany)` is the type of your relationship,
+  - `<option>` is one of the supported values: `onDelete | onUpdate`. Make sure to put this on the correct side of the relationship.
+  - `<option value>` is one of the fitting values for the given option: `NO ACTION | RESTRICT | CASCADE | SET NULL | SET DEFAULT`
+  - `<from entity>` is the name of the entity owner of the relationship: the source,
+  - `<to entity>` is the name of the entity where the relationship goes to: the destination,
+  - `<relationship name>` is the name of the field having the other end as type,
+  - `<display field>` is the name of the field that should show up in select boxes (default: `id`),
+  - `required` whether the injected field is required.
+  - `with jpaDerivedIdentifier` whether `@MapsId` is used for the association (applicable only for one-to-one)
+  - And you can have more than one relationship body
+    - See the [Multiple relationship bodies](#multiple-relationship-bodies) section for more info!
+>>>>>>> upstream/main
 
 ---
 
@@ -164,7 +194,21 @@ relationship OneToOne {
 
 ---
 
+<<<<<<< HEAD
 #### 必須のサイド
+=======
+#### With options
+
+```jdl
+relationship ManyToOne {
+   A to @OnDelete("SET NULL") @OnUpdate("CASCADE") B
+}
+```
+
+---
+
+#### With required sides
+>>>>>>> upstream/main
 
 少なくとも1つのリレーションシップサイドを必須にするために使用します。
 
