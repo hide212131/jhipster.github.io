@@ -44,10 +44,18 @@ JHipsterは、標準のMavenディレクトリ・レイアウトを使用しま�
 
 フロントエンドとバックエンドが分離されると、問題はHTTPリクエストの処理方法になります。
 
+<<<<<<< HEAD
 - すべてのAPI呼び出しは`/api`プレフィックスを使用します。Angularを使用している場合、`webpack.common.js`設定で定義された特定の`SERVER_API_URL`定数もあり、このプレフィックスを強化できます。例えば、`"http://api.jhipster.tech:8081/"`をバックエンドAPIサーバとして使用できます（これを行う場合は、以下のCORSに関するドキュメントをお読みください）。
 - `/index.html`は、ブラウザまたはサーバによってキャッシュされるべきではありません。
 - （フロントエンドの）静的アセットである`/app`（クライアント側アプリケーションを含む）および`/content`（画像やCSSなどの静的コンテンツを含む）を提供する`/`の呼び出しは、これらのアセットがハッシュ化されるため、プロダクション環境でキャッシュされるべきです。
 - 存在しないルートへのコールは、リクエストを`index.html`に転送する必要があります。これは通常、`ClientForwardController`を介してバックエンドで処理されます。クライアントを個別にデプロイする場合、これを設定する必要があります。いくつかの例については、[Angular](https://angular.io/guide/deployment#server-configuration)または[React](https://facebook.github.io/create-react-app/docs/deployment)のドキュメントを参照してください。
+=======
+- All API calls will use a `/api` prefix. If you are using Angular, there is also a specific `SERVER_API_URL` constant, defined in the `webpack.common.js` configuration, that can enrich this prefix. For example, you can use `"http://api.jhipster.tech:8081/"` as a back-end API server (If you do this, please read our documentation on CORS below).
+- `/index.html` should not be cached by the browser or server.
+- Calls to `/` that serve static assets (from the front-end) `/app` (which contains the client-side application) and `/content` (which contains the static content, like images and CSS) should be cached in production, as those assets are hashed.
+- Calls to `/i18n` can be cached but files itsefs not are hashed, url query string are used
+- Calls to a non-existent route should forward the request to `index.html`. This is normally handled in the backend through `ClientForwardController`. When deploying the client separately, this needs to be configured.  See the [Angular](https://angular.io/guide/deployment#server-configuration) or [React](https://facebook.github.io/create-react-app/docs/deployment) documentation for several examples.
+>>>>>>> upstream/main
 
 # BrowserSyncの使用
 

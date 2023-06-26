@@ -41,6 +41,7 @@ Angularルートの場合は、URLが明確で一貫性のあるものになる�
 プロジェクトの主な構成は次のとおりです。
 
     webapp
+<<<<<<< HEAD
     ├── app                               - アプリケーション
     │   ├── account                       - ユーザー・アカウント管理UI
     │   ├── admin                         - 管理UI
@@ -62,6 +63,32 @@ Angularルートの場合は、URLが明確で一貫性のあるものになる�
     ├── favicon.ico                       - お気に入りアイコン
     ├── index.html                        - 索引ページ
     ├── robots.txt                        - ボットおよびWebクローラの構成
+=======
+    ├── app                               - Your application
+    │   ├── account                       - User account management UI
+    │   ├── admin                         - Administration UI
+    │   ├── config                        - Some utilities files
+    │   ├── core                          - Common building blocks like configuration and interceptors
+    │   ├── entities                      - Generated entities (more information below)
+    │   ├── home                          - Home page
+    │   ├── layouts                       - Common page layouts like navigation bar and error pages
+    │       ├── main                      - Main page
+    │           ├── main.component.ts     - Main application class
+    │   ├── login                         - Login page
+    │   ├── shared                        - Common services like authentication and internationalization
+    │   ├── app.module.ts                 - Application modules configuration
+    │   ├── app-routing.module.ts         - Main application router
+    ├── content                           - Static content
+    │   ├── css                           - CSS stylesheets
+    │   ├── images                        - Images
+    │   ├── scss                          - Sass style sheet files will be here if you choose the option
+    ├── i18n                              - Translation files
+    ├── swagger-ui                        - Swagger UI front-end
+    ├── 404.html                          - 404 page
+    ├── favicon.ico                       - Fav icon
+    ├── index.html                        - Index page
+    ├── robots.txt                        - Configuration for bots and Web crawlers
+>>>>>>> upstream/main
 
 [エンティティサブジェネレータ]({{ site.url }}/creating-an-entity/)を使用して`Foo`という名前の新しいエンティティを作成すると、`src/main/webapp`の下に次のフロントエンドファイルが生成されます。
 
@@ -99,14 +126,18 @@ JHipsterは[Angularルータ](https://angular.io/docs/ts/latest/guide/router.htm
 
 権限はサーバー側でもクラス`AuthoritiesConstants.java`で定義されており、論理的にはクライアント側とサーバー側の権限は同じでなければなりません。
 
+<<<<<<< HEAD
 次の例では、'sessions'ステートは、`ROLE_USER`権限を持つ認証済みユーザーによってのみアクセスされるように設計されています。
+=======
+In the example below, the 'settings' state is designed to be accessed only by authenticated users who have `ROLE_ADMIN` authority:
+>>>>>>> upstream/main
 
-    export const sessionsRoute: Route = {
+    export const settingsRoute: Route = {
         path: 'sessions',
-        component: SessionsComponent,
+        component: SettingsComponent,
+        title: 'global.menu.account.settings',
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'global.menu.account.sessions'
+            authorities: ['ROLE_ADMIN'],
         },
         canActivate: [UserRouteAccessService]
     };

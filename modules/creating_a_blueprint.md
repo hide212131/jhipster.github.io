@@ -40,10 +40,13 @@ JHipsterのBlueprintは、依存関係として`generator-jhipster`を持つ必�
 ```javascript
 import chalk from 'chalk';
 import ClientGenerator from 'generator-jhipster/generators/client';
+<<<<<<< HEAD
 import {
   INITIALIZING_PRIORITY,
   // その他の優先順位は簡潔にするため省略しています
 } from 'generator-jhipster/priorities';
+=======
+>>>>>>> upstream/main
 
 export default class extends ClientGenerator {
   constructor(args, opts, features) {
@@ -56,7 +59,7 @@ export default class extends ClientGenerator {
     }
   }
 
-  get [INITIALIZING_PRIORITY]() {
+  get [ClientGenerator.INITIALIZING]() {
     return {
       // async preInitializingTemplateTask() {},
       ...super._initializing(),
@@ -89,7 +92,7 @@ JHipsterから優先順位をカスタマイズする方法はいくつかあり
 1) JHipsterに優先順位を処理させます。Blueprintは何も上書きしません。
 
 ```javascript
-    get [INITIALIZING_PRIORITY]() {
+    get [Generator.INITIALIZING]() {
         return super.initializing;
     }
 ```
@@ -97,7 +100,7 @@ JHipsterから優先順位をカスタマイズする方法はいくつかあり
 2) 優先順位全体を上書きします。これは、Blueprintが優先順位を制御する場合です。
 
 ```javascript
-  get [INITIALIZING_PRIORITY]() {
+  get [Generator.INITIALIZING]() {
     return {
       myCustomInitPriorityStep() {
         // ここですべての作業を行います。
@@ -112,7 +115,7 @@ JHipsterから優先順位をカスタマイズする方法はいくつかあり
 3) 優先順位を部分的にオーバーライドします。これは、BlueprintがJHipsterから優先順位を取得し、それをカスタマイズする場合となります。
 
 ```javascript
-    get [INITIALIZING_PRIORITY]() {
+    get [Generator.INITIALIZING]() {
         return {
             ...super._initializing(),
             displayLogo() {
